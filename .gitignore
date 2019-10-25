@@ -1,8 +1,12 @@
 # Mac files
 .DS_Store
 
-# csv files due to size
+# working csv files or too large
 *.csv
+
+# finished csv files
+!data/four_trait_df.csv
+
 
 # History files
 .Rhistory

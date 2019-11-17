@@ -4,9 +4,7 @@
 # working csv files or too large
 *.csv
 
-# finished / working csv files
-!data/interim/weather_2017_az_time.csv
-
+/data/
 
 # History files
 .Rhistory

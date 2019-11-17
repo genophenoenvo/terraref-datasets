@@ -5,7 +5,7 @@
 *.csv
 
 # finished / working csv files
-!data/weather_2017_az_time.csv
+!data/interim/weather_2017_az_time.csv
 
 
 # History files

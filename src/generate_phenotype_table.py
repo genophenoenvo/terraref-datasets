@@ -51,10 +51,42 @@ df_2['range'] = df_2['sitename'].str.extract("Range (\d+)").astype(int)
 df_2['column'] = df_2['sitename'].str.extract("Column (\d+)").astype(int)
 
 
-# In[8]:
+# #### Convert table to wide format
+# * Each trait should have its own column
+# * Rename `mean` column to `value` for easier understanding
+
+# In[10]:
+
+
+df_3 = df_2.rename({'mean': 'value'}, axis=1)
+
+
+# In[13]:
+
+
+traits_to_keep = ['leaf_temperature', 'ambient_humidity', 'proximal_air_temperature', 'surface_temperature',
+                  'aboveground_dry_biomass', 'canopy_height', 'flag_leaf_emergence_time', 'flowering_time',
+                  'canopy_cover']
+
+empty_df = pd.DataFrame(data=df_3, index=df_3.index, columns=traits_to_keep)
+
+
+# In[18]:
+
+
+df_4 = pd.concat([df_3, empty_df.reindex(df_3.index)], axis=1)
+
+
+# In[21]:
 
 
 timestamp = datetime.datetime.now().replace(microsecond=0).isoformat()
 output_filename = f'pheno-table_{timestamp}.csv'.replace(':', '')
-df_2.to_csv(f'../data/processed/{output_filename}', index=False)
+df_4.to_csv(f'../data/processed/{output_filename}', index=False)
+
+
+# In[ ]:
+
+
+
 

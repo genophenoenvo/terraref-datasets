@@ -89,24 +89,24 @@ df_5 = df_4.drop(labels=['result_type', 'treatment_id', 'treatment', 'dateloc'],
 
 # #### Populate empty columns with available values
 
-# In[12]:
+# In[21]:
 
 
 # This is very slow - needs refactoring for .py script and reproducible notebook 
 
-# run_slow_stuff = False
+run_slow_stuff = False
 
-# if run_slow_stuff:
+if run_slow_stuff:
 
-counter = 0
+    counter = 0
 
-for index, row in df_5.iterrows():
-    if counter % 1000 == 0:
-        print(counter)            
-        counter += 1
-    for trait in traits_to_keep:
-        if row['trait'] == trait:                
-            df_5.loc[index, [trait]] = row['value']
+    for index, row in df_5.iterrows():            
+        if counter % 1000 == 0:
+            print(counter)            
+            counter += 1
+        for trait in traits_to_keep:
+            if row['trait'] == trait:                
+                df_5.loc[index, [trait]] = row['value']
 
 
 # In[13]:
@@ -156,7 +156,7 @@ df_6.drop(labels=['month', 'year', 'notes', 'trait', 'method_name', 'notes'], ax
 # In[16]:
 
 
-# Update df_* 
+# Update df_* with timestamp
 # df_6 will be renamed
 
 timestamp = datetime.datetime.now().replace(microsecond=0).isoformat()

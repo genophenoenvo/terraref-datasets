@@ -36,16 +36,25 @@ df_1 = df_0.drop(labels=['Unnamed: 0', 'checked', 'citation_id', 'city', 'scient
 df_1.head()
 
 
+# #### Extract Range and Column Values
+
 # In[5]:
+
+
+df_2 = df_1.copy()
+
+
+# In[6]:
+
+
+df_2['range'] = df_2['sitename'].str.extract("Range (\d+)").astype(int)
+df_2['column'] = df_2['sitename'].str.extract("Column (\d+)").astype(int)
+
+
+# In[8]:
 
 
 timestamp = datetime.datetime.now().replace(microsecond=0).isoformat()
 output_filename = f'pheno-table_{timestamp}.csv'.replace(':', '')
-df_1.to_csv(f'../data/processed/{output_filename}', index=False)
-
-
-# In[ ]:
-
-
-
+df_2.to_csv(f'../data/processed/{output_filename}', index=False)
 

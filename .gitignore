@@ -1,8 +1,9 @@
 # Mac files
 .DS_Store
 
-# working csv files or too large
+# working csv files, sql databases, or anything too large
 *.csv
+*.sqlite
 
 /data/
 

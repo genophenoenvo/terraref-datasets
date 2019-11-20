@@ -3,7 +3,7 @@
 
 # ### Phenotype Table for Initial Set of Training Data
 
-# In[1]:
+# In[3]:
 
 
 import datetime
@@ -134,11 +134,13 @@ df_6.drop(labels=['month', 'year', 'notes', 'trait', 'method_name', 'notes'], ax
 
 # #### Read in `df_6` 
 
-# In[15]:
+# In[4]:
 
 
 df_6 = pd.read_csv('../data/processed/pheno-table_populated_traits_2019-11-18T071126.csv')
 
+
+# #### Join `avg_canopy_heights` df with main df
 
 # #### Calculate average canopy heights
 # 1. Convert df to sqlite db
@@ -147,7 +149,7 @@ df_6 = pd.read_csv('../data/processed/pheno-table_populated_traits_2019-11-18T07
 
 # #### Establish connection to sqlite db
 
-# In[16]:
+# In[5]:
 
 
 conn = sqlite3.connect('season_4_phenos.sqlite')
@@ -157,13 +159,15 @@ print("Opened database successfully")
 
 # #### Convert df to sqlite db and generate average canopy height df
 
-# In[17]:
+# In[9]:
 
 
-df_6.to_sql('season_4_phenos.sqlite', conn)
+# if or try here 
+
+# df_6.to_sql('season_4_phenos.sqlite', conn)
 
 
-# In[18]:
+# In[11]:
 
 
 avg_canopy_heights = pd.read_sql_query("""
@@ -175,12 +179,57 @@ avg_canopy_heights = pd.read_sql_query("""
                                         """, conn)
 
 
-# #### Join `avg_canopy_heights` df with main df
+# In[12]:
+
+
+df_7 = pd.merge(left=df_6, right=avg_canopy_heights, how='outer', on=['date', 'column', 'range']).set_index(df_6.index)
+
+
+# #### Combine other values found in E & W sites
+# * entity is not a value that can be averaged, but when the duplicates are dropped, the entries with entity can get priority
+# * leaf temperature
+# * canopy cover
+
+# In[13]:
+
+
+average_leaf_temps = pd.read_sql_query("""
+                                        Select range, column, date, avg(leaf_temperature) AS avg_leaf_temp
+                                        FROM 'season_4_phenos.sqlite'
+                                        WHERE leaf_temperature IS NOT NULL
+                                        GROUP BY range, column, date
+                                        ORDER BY date DESC;
+                                        """, conn)
+
+
+# In[16]:
+
+
+average_canopy_cover = pd.read_sql_query("""
+                                        Select range, column, date, avg(canopy_cover) AS avg_canopy_cover
+                                        FROM 'season_4_phenos.sqlite'
+                                        WHERE canopy_cover IS NOT NULL
+                                        GROUP BY range, column, date
+                                        ORDER BY date DESC;
+                                        """, conn)
+
 
 # In[19]:
 
 
-df_7 = pd.merge(left=df_6, right=avg_canopy_heights, how='outer', on=['date', 'column', 'range']).set_index(df_6.index)
+df_8 = pd.merge(left=df_7, right=average_leaf_temps, how='outer', on=['date', 'column', 'range']).set_index(df_7.index)
+
+
+# In[21]:
+
+
+df_9 = pd.merge(left=df_8, right=average_canopy_cover, how='outer', on=['date', 'column', 'range']).set_index(df_8.index)
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:
@@ -239,5 +288,5 @@ df_7 = pd.merge(left=df_6, right=avg_canopy_heights, how='outer', on=['date', 'c
 
 timestamp = datetime.datetime.now().replace(microsecond=0).isoformat()
 output_filename = f'pheno-table_{timestamp}.csv'.replace(':', '')
-df_7.to_csv(f'../data/processed/{output_filename}')
+df_9.to_csv(f'../data/processed/{output_filename}')
 

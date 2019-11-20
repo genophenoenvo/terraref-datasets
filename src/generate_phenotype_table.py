@@ -9,6 +9,7 @@
 import datetime
 import pandas as pd
 import numpy as np
+import sqlite3
 
 
 # #### Import dataset downloaded from betydb in R
@@ -17,7 +18,7 @@ import numpy as np
 
 
 df_0 = pd.read_csv('../data/raw/mac_season_4.csv')
-df_0.head()
+# df_0.head()
 
 
 # In[3]:
@@ -89,7 +90,7 @@ df_5 = df_4.drop(labels=['result_type', 'treatment_id', 'treatment', 'dateloc'],
 
 # #### Populate empty columns with available values
 
-# In[21]:
+# In[12]:
 
 
 # This is very slow - needs refactoring for .py script and reproducible notebook 
@@ -108,6 +109,8 @@ if run_slow_stuff:
             if row['trait'] == trait:                
                 df_5.loc[index, [trait]] = row['value']
 
+
+# #### Change plots to index
 
 # In[13]:
 
@@ -134,16 +137,91 @@ df_6.drop(labels=['month', 'year', 'notes', 'trait', 'method_name', 'notes'], ax
 # In[15]:
 
 
-# df_6 = pd.read_csv(('../data/processed/pheno-table_populated_traits_2019-11-18T071126.csv')
+df_6 = pd.read_csv('../data/processed/pheno-table_populated_traits_2019-11-18T071126.csv')
+
+
+# #### Calculate average canopy heights
+# 1. Convert df to sqlite db
+# 2. Group by range and column values (to bypass the current E and W plots which are still in the dataset) and date 
+# 3. Generate average canopy height values to add to dataset
+
+# #### Establish connection to sqlite db
+
+# In[16]:
+
+
+conn = sqlite3.connect('season_4_phenos.sqlite')
+cursor = conn.cursor()
+print("Opened database successfully")
+
+
+# #### Convert df to sqlite db and generate average canopy height df
+
+# In[17]:
+
+
+df_6.to_sql('season_4_phenos.sqlite', conn)
+
+
+# In[18]:
+
+
+avg_canopy_heights = pd.read_sql_query("""
+                                        Select range, column, date, avg(canopy_height) AS avg_canopy_height
+                                        FROM 'season_4_phenos.sqlite'
+                                        WHERE canopy_height NOTNULL
+                                        GROUP BY range, column, date
+                                        ORDER BY date DESC;
+                                        """, conn)
+
+
+# #### Join `avg_canopy_heights` df with main df
+
+# In[19]:
+
+
+df_7 = pd.merge(left=df_6, right=avg_canopy_heights, how='outer', on=['date', 'column', 'range']).set_index(df_6.index)
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# #### Add temperatures to calculate GDD
+
+# In[ ]:
+
+
+
 
 
 # #### Add growing degree days
 
+# In[20]:
+
+
+# from tutorials
+
+#   mutate(date = as.Date(time), 
+#          air_temp_converted = air_temperature - 273.15) %>% 
+#   group_by(date) %>% 
+#   summarise(min_temp = min(air_temp_converted), 
+#             max_temp = max(air_temp_converted), 
+#             gdd = ifelse(sum(min_temp, max_temp) / 2 > 10, 
+#                          (max_temp + min_temp) / 2 - 10, 0))
+
+
 # #### Add max canopy height
 
 # #### Re-order column names
-
-# #### Change plots to index
 
 # #### Add planting date column
 
@@ -153,7 +231,7 @@ df_6.drop(labels=['month', 'year', 'notes', 'trait', 'method_name', 'notes'], ax
 
 
 
-# In[16]:
+# In[21]:
 
 
 # Update df_* with timestamp
@@ -161,5 +239,5 @@ df_6.drop(labels=['month', 'year', 'notes', 'trait', 'method_name', 'notes'], ax
 
 timestamp = datetime.datetime.now().replace(microsecond=0).isoformat()
 output_filename = f'pheno-table_{timestamp}.csv'.replace(':', '')
-df_6.to_csv(f'../data/processed/{output_filename}')
+df_7.to_csv(f'../data/processed/{output_filename}')
 

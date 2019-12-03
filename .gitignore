@@ -4,6 +4,7 @@
 # working csv files, sql databases, or anything too large
 *.csv
 *.sqlite
+*.db
 
 /data/
 

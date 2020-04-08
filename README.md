@@ -1,13 +1,13 @@
 # terraref-datasets
 
-For **GenoPhenoEnvo** collaborators: if you already have a [CyVerse](https://cyverse.org/) account, please follow these instructions to access the **reproducible data cleaning app** for MAC sorghum seasons 4 and 6. This app and associated input data have not yet been made public. If you do not have app access, please make sure that you have a CyVerse account and send me your username via Slack or [e-mail](mailto:ejcain@arizona.edu).
+For **GenoPhenoEnvo** collaborators: if you already have a [CyVerse](https://cyverse.org/) account, please follow these instructions to access the **reproducible data cleaning apps** for MAC Sorghum Seasons 4 and 6 and Kansas Sorghum Experiments. These apps and associated input data have not yet been made public. If you do not have app access, please make sure that you have a CyVerse account and send me your username via Slack or [e-mail](mailto:ejcain@arizona.edu).
 
-#### Instructions for running CyVerse VICE Data Cleaning App
+#### Instructions for running CyVerse VICE Data Cleaning Apps
 
 - Log into [CyVerse](https://cyverse.org/) and launch the `Discovery Environment`
 - Click the `Apps` button on the left
 - Under `My Apps`, select `Shared with me`
-- From the (three dots) menu in the top right corner of the `MAC Sorghum Data Cleaning` app, select `Quick Launch`
+- From the (three dots) menu in the top right corner of the `MAC Sorghum Data Cleaning` or `Kansas Sorghum Experiments Data Cleaning` app, select `Quick Launch`
 - Select `Create Quick Launch`
 - From the window that pops up, select `Launch Analysis` in the lower right corner
 - Once the analysis has been launched, a notification will appear in the top right corner, where you will be able to select `Access your running analysis here`.

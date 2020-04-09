@@ -1,8 +1,10 @@
 # terraref-datasets
 
-For **GenoPhenoEnvo** collaborators: if you already have a [CyVerse](https://cyverse.org/) account, please follow these instructions to access the **reproducible data cleaning apps** for MAC Sorghum Seasons 4 and 6 and Kansas Sorghum Experiments. These apps and associated input data have not yet been made public. If you do not have app access, please make sure that you have a CyVerse account and send me your username via Slack or [e-mail](mailto:ejcain@arizona.edu).
+This repository contains code used for data cleaning and small, derived datasets for the NSF-funded [GenoPhenoEnvo](https://genophenoenvo.github.io/) project. This repo supports one of our goals to provide open data and reproducible source code in order to follow FAIR(https://www.go-fair.org/fair-principles/) data principles and contribute to open science. 
 
 #### Instructions for running CyVerse VICE Data Cleaning Apps
+
+For **GenoPhenoEnvo** collaborators: if you already have a [CyVerse](https://cyverse.org/) account, please follow these instructions to access the **reproducible data cleaning apps** for MAC Sorghum Seasons 4 and 6 and Kansas Sorghum Experiments. These apps and associated input data have not yet been made public. If you do not have app access, please make sure that you have a CyVerse account and send your username via Slack or [e-mail](mailto:ejcain@arizona.edu).
 
 - Log into [CyVerse](https://cyverse.org/) and launch the `Discovery Environment`
 - Click the `Apps` button on the left
@@ -19,5 +21,3 @@ For **GenoPhenoEnvo** collaborators: if you already have a [CyVerse](https://cyv
 - Alternatively, you can go back to the Discovery Environment and select the `Analyses` button. You will see the app running and can choose from the (three dots) menu to `Complete and save outputs`. All output files will be saved under your personal analyses folder, with the rest of your data in the Discovery Environment.
 
 Note: you may only have two analyses running at one time
-
-If you have any questions, let me know!

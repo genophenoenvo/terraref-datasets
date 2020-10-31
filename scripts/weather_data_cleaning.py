@@ -41,6 +41,8 @@ clemson_temps_filename = "clemson_temps_daily.csv"
 clemson_rh_filename = "clemson_rh_daily.csv"
 
 folder_name = 'data'
+if not os.path.exists(folder_name):
+    os.makedirs(folder_name)
 
 # MAC Season 4
 

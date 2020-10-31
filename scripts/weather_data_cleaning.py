@@ -14,7 +14,7 @@ def read_in_csv(url, folder_name, file_name):
     df = pd.read_csv(folder_name + '/' + file_name)
     return df
 
-
+# reimplementation of get.vpd and get.es from PEcAn met utils
 def calculate_vpd(temp_avg, rh_avg):
     es = (6.11 * np.exp((2500000/461) * (1/273 - 1/(273 + temp_avg))))
     vpd = (((100 - rh_avg)/1000) * es)
@@ -287,4 +287,3 @@ list_of_dfs = [s4_11, s6_11, ksu_14, clemson_16]
 list_of_output_filenames = ['mac_season_4_weather.csv', 'mac_season_6_weather.csv', 'ksu_weather.csv', 'clemson_weather.csv']
 
 save_to_csv(list_of_dfs, list_of_output_filenames)
-

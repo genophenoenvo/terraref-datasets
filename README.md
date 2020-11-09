@@ -114,16 +114,33 @@ LeBauer, David et al. (2020), Data From: TERRA-REF, An open reference data set f
 - `aboveground_dry_biomass`: `kg/ha`
     - **MAC Season 4, MAC Season 6, Clemson**
 
-#### Table comparing cultivars with available traits and genomic data
-
-- < name of file >
-
 #### The following Jupyter notebooks contain code to process the raw trait data
 
-- `mac_season_4_data_cleaning.ipynb`
-- `mac_season_6_data_cleaning.ipynb`
-- `ksu_data_cleaning.ipynb`
-- `clemson_data_cleaning.ipynb`
+- [`mac_season_4_data_cleaning.ipynb`](https://de.cyverse.org/dl/d/AA24FF46-8521-473F-9F82-BF08385053B4/mac_season_4_data_cleaning.ipynb)
+- [`mac_season_6_data_cleaning.ipynb`](https://de.cyverse.org/dl/d/ABBF955A-43ED-4811-8554-3C0F2C66A9AE/mac_season_6_data_cleaning.ipynb)
+- [`ksu_data_cleaning.ipynb`](https://de.cyverse.org/dl/d/CE4BF004-1C6C-4954-A93E-7A388EC846D2/ksu_data_cleaning.ipynb)
+- [`clemson_data_cleaning.ipynb`](https://de.cyverse.org/dl/d/C70855EF-37B6-4DFE-98B3-02B8904E5127/clemson_data_cleaning.ipynb)
+
+#### Processed trait data with CyVerse download links
+
+**MAC Season 4**
+- [`mac_season_4_aboveground_dry_biomass.csv`](https://de.cyverse.org/dl/d/015BB53B-0B1D-4653-95B7-2FF9A04A0C1F/mac_season_4_aboveground_dry_biomass.csv)
+- [`mac_season_4_canopy_height_manual.csv`](https://de.cyverse.org/dl/d/41DC8F3F-A72F-4EB9-A1C0-9352DCAAFB75/mac_season_4_canopy_height_manual.csv)
+- [`mac_season_4_days_gdd_to_flowering.csv`](https://de.cyverse.org/dl/d/BFF25218-4D3B-4A5A-9C05-A232255E12F6/mac_season_4_days_gdd_to_flowering.csv)
+- [`mac_season_4_days_gdd_to_flag_leaf_emergence.csv`](https://de.cyverse.org/dl/d/8F2835BF-48C9-418F-9BDA-66E66F1B34BD/mac_season_4_days_gdd_to_flag_leaf_emergence.csv)
+
+**MAC Season 6**
+- [`mac_season_6_aboveground_dry_biomass.csv`](https://de.cyverse.org/dl/d/C1F477C1-63A7-4FE8-991F-1CA4DA0A69ED/mac_season_6_aboveground_dry_biomass.csv)
+- [`mac_season_6_canopy_height_sensor.csv`](https://de.cyverse.org/dl/d/BEC5B164-EC6F-45E5-8E64-FC0E63D9A059/mac_season_6_canopy_height_sensor.csv)
+
+**KSU**
+- [`ksu_canopy_heights.csv`](https://de.cyverse.org/dl/d/52A1FDEE-C95F-4BC7-8001-027A6ED2AA09/ksu_canopy_height.csv)
+- [`ksu_days_gdd_to_flowering.csv`](https://de.cyverse.org/dl/d/88020A6C-6430-4B1E-BFDC-69C42E7E335C/ksu_days_gdd_to_flowering.csv)
+
+**Clemson**
+- [`clemson_days_gdd_to_flowering.csv`](https://de.cyverse.org/dl/d/A463AD0E-7BB5-451F-83AE-DAFD7939616C/clemson_days_gdd_to_flowering.csv)
+- [`clemson_plant_height.csv`](https://de.cyverse.org/dl/d/A3E4CE55-C615-451A-B71E-49A92E17500F/clemson_plant_height.csv)
+- [`clemson_aboveground_dry_biomass.csv`](https://de.cyverse.org/dl/d/6814725D-C10F-45D3-8148-A2A598A2AB91/clemson_aboveground_dry_biomass.csv)
 
 ---
 
